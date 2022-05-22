@@ -17,8 +17,10 @@ contract WavePortal is Ownable, VRFConsumerBaseV2 {
   }
   Wave[] waves;
   mapping(address => uint) public records;
+  mapping(address => uint256) public lastWavedAt;
   event NewWave(address indexed from, uint256 timestamp, string message);
 
+  uint cooldown = 15 minutes;
   uint256 prizeAmount = 0.0001 ether;
 
   // Chainlink
@@ -52,6 +54,13 @@ contract WavePortal is Ownable, VRFConsumerBaseV2 {
   }
 
   function wave(string memory _message) public {
+
+    require(
+        lastWavedAt[msg.sender] + cooldown < block.timestamp,
+        "Wait more time"
+    );
+    lastWavedAt[msg.sender] = block.timestamp;
+
     waves.push(
       Wave(msg.sender, _message, block.timestamp)
     );

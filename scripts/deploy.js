@@ -1,6 +1,9 @@
 //
+require('dotenv').config();
 
 const main = async () => {
+  const chanlinkSubscriptionId = process.env['RINKEBY_CHAINLINK_SUBSCRIPTION_ID'];
+
   const [deployer] = await hre.ethers.getSigners();
   const accountBalance = await deployer.getBalance();
 
@@ -8,9 +11,12 @@ const main = async () => {
   console.log("Account balance: %s", accountBalance.toString());
 
   const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
-  const waveContract = await waveContractFactory.deploy({
-    value: hre.ethers.utils.parseEther("0.01")
-  });
+  const waveContract = await waveContractFactory.deploy(
+    chanlinkSubscriptionId,
+    {
+      value: hre.ethers.utils.parseEther("0.01")
+    }
+  );
   await waveContract.deployed();
 
   console.log("WavePortaal contract address: %s", waveContract.address);
