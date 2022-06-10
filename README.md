@@ -1,15 +1,4 @@
-# Basic Sample Hardhat Project
+# buildspace Ethereum Wave Portal App (Back-End)
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+- Solidity contract for tracking simple interactions and messages on-chain.
+- [Contract deployed to Rinkeby testnet (address:0x164573acF692892cfe2B9364dE53507F5F44330d)](https://rinkeby.etherscan.io/address/0x164573acF692892cfe2B9364dE53507F5F44330d)
